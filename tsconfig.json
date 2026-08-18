@@ -1,0 +1,9 @@
+{
+  "references": [
+    { "path": "packages/dev-server" },
+    { "path": "packages/koa" },
+    { "path": "packages/es-server" },
+    { "path": "src" }
+  ],
+  "files": []
+}

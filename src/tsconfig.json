@@ -1,0 +1,17 @@
+{
+  "extends": "@soul_master/ts-config/web.json",
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "react-jsx",
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.json"
+  ],
+  "references": [
+    { "path": "../packages/dev-server" },
+    { "path": "../packages/es-server" },
+    { "path": "../packages/koa" }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "@soul_master/ts-config/node-lib.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "build",
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src/**/*.mts", "test/**/*.mts"]
+}

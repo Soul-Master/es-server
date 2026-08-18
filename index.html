@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ES Server React Example</title>
+
+</head>
+<body>
+  <div id="root">Loading…</div>
+
+  <script type="module">
+    const loaderURL = new URL(
+      "/@es-server/load-typescript.mts",
+      location.origin,
+    );
+
+    try {
+      const response = await fetch(loaderURL, {
+        cache: "no-store",
+        headers: { Accept: "text/javascript" },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Could not load ${loaderURL.pathname}: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const source = await response.text();
+      const moduleURL = URL.createObjectURL(
+        new Blob([source], { type: "text/javascript" }),
+      );
+
+      try {
+        await import(moduleURL);
+      } finally {
+        URL.revokeObjectURL(moduleURL);
+      }
+    } catch {
+      document.getElementById("root").textContent =
+        "Failed to load the ES Server browser runtime.";
+    }
+  </script>
+</body>
+</html>

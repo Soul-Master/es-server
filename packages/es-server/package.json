@@ -1,0 +1,22 @@
+{
+  "name": "es-server",
+  "version": "1.0.0",
+  "description": "A minimal ES development server for native browser modules",
+  "type": "module",
+  "bin": {
+    "es-server": "src/server.mts"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "files": ["src"],
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "dependencies": {
+    "@es-server/koa": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "~24.13.3"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "@soul_master/ts-config/worker.json",
+  "compilerOptions": {
+    "strict": true
+  },
+  "include": ["sw.mts"]
+}

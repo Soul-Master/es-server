@@ -1,0 +1,28 @@
+{
+  "name": "@es-server/koa",
+  "version": "1.0.0",
+  "description": "Koa adapter for ES Server",
+  "type": "module",
+  "exports": {
+    ".": "./src/server.mts",
+    "./middleware": "./src/middleware.mts",
+    "./typescript-middleware": "./src/typescript-middleware.mts"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "files": ["src"],
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "dependencies": {
+    "@es-server/dev-server": "1.0.0",
+    "koa": "~3.2.1",
+    "koa-static": "~5.0.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^3.0.3",
+    "@types/koa-static": "^4.0.4",
+    "@types/node": "~24.13.3"
+  }
+}
