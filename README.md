@@ -34,11 +34,14 @@ The package workspace exposes:
 - `es-server <directory>` — serves a specific directory
 - `@es-server/dev-server` — exports framework-neutral handlers and contracts
 - `@es-server/koa` — exports the Koa server adapter
+- `@es-server/koa/html-middleware` — injects import-map and browser tooling tags
 - `@es-server/koa/middleware` — adapts any shared handler to Koa
+- `@es-server/koa/source-file-middleware` — applies TypeScript and JavaScript source MIME types
 - `@es-server/koa/typescript-middleware` — exports the Koa middleware
 
-The server uses `127.0.0.1:8080` by default. Set `HOST` or `PORT` to override
-either value.
+The server uses `127.0.0.1:8080` and ECMAScript target 2024 by default. Set
+`HOST`, `PORT`, or `TARGET` to override these values. Programmatic server
+options accept the target as a year, for example `{ target: 2022 }`.
 
 ## Requirements
 
@@ -77,10 +80,12 @@ npm run build
 ```
 
 Application code keeps normal imports such as `react` and
-`react-dom/client`. The shared `packages/dev-server/tooling/importmap.mts`
-module reads the served project's `dependencies` and maps them to esm.sh for
-development. Local imports use explicit extensions so the browser can resolve
-them without bundler-specific rules.
+`react-dom/client`. The HTML middleware replaces existing import-map tags—or
+injects tags after the document title—with a server-generated inline import
+map and the Service Worker loader. The generated map combines dependencies
+mapped to esm.sh with inline and local JSON import-map declarations; document
+mappings take precedence. Local imports use explicit extensions so the browser
+can resolve them without bundler-specific rules.
 
 The browser runtime transforms one requested `.ts`, `.tsx`, or `.jsx` file at a
 time. Module traversal remains the browser's responsibility. Inline source

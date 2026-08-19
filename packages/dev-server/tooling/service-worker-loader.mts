@@ -1,16 +1,6 @@
-type ImportMap = {
-  imports: Record<string, string>;
-};
-
 const entryModuleURL = new URL('/src/main.tsx', location.origin).href;
 
-declare global {
-  var importMapReady: Promise<ImportMap>;
-}
-
 async function start(): Promise<void> {
-  await globalThis.importMapReady;
-
   if (!('serviceWorker' in navigator)) {
     showError('Service Worker is not supported in this browser.');
     return;

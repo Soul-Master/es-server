@@ -5,10 +5,13 @@
   "type": "module",
   "exports": {
     ".": "./src/server.mts",
+    "./html-middleware": "./src/html-middleware.mts",
     "./middleware": "./src/middleware.mts",
+    "./source-file-middleware": "./src/source-file-middleware.mts",
     "./typescript-middleware": "./src/typescript-middleware.mts"
   },
   "scripts": {
+    "test": "node --test test/*.test.mts",
     "build": "tsc --project tsconfig.json"
   },
   "files": ["src"],

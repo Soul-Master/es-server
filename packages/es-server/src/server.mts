@@ -2,15 +2,20 @@
 
 import { resolve } from 'node:path';
 
-import { startKoaServer } from '@es-server/koa';
+import {
+  startKoaServer,
+  type KoaServerOptions,
+} from '@es-server/koa';
 
 const projectRoot: string = resolve(process.argv[2] ?? process.cwd());
 const host: string = process.env['HOST'] ?? '127.0.0.1';
 const port: number = parsePort(process.env['PORT']);
+const target = parseTarget(process.env['TARGET']);
 startKoaServer({
   rootDirectory: projectRoot,
   host,
   port,
+  target,
   onListening() {
     console.log(`ES Server: http://${host}:${port}`);
     console.log(`Serving: ${projectRoot}`);
@@ -25,4 +30,16 @@ function parsePort(value: string | undefined): number {
   }
 
   return port;
+}
+
+function parseTarget(
+  value: string | undefined,
+): NonNullable<KoaServerOptions['target']> {
+  const target = Number(value ?? '2024');
+
+  if (!Number.isInteger(target) || target < 2015 || target > 2024) {
+    throw new Error(`Invalid TARGET value: ${value}`);
+  }
+
+  return target as NonNullable<KoaServerOptions['target']>;
 }
